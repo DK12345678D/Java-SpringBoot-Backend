@@ -1,7 +1,8 @@
 package com.app.controller;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,52 +15,54 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.app.dto.CourseDto;
 import com.app.model.Course;
 import com.app.repository.CourseRepository;
+
 @RestController
 @RequestMapping("/api/courses")
 @CrossOrigin(origins = "http://localhost:4200")
 public class CourseController {
-    @Autowired private CourseRepository courseRepository;
+	@Autowired
+	private CourseRepository repo;
 
-    @PostMapping
-    public ResponseEntity<?> createCourse(@RequestBody Course course) {
-        // Validate prerequisites
-        for (Course prereq : course.getPrerequisites()) {
-            if (!courseRepository.findById(prereq.getId()).isPresent()) {
-                return ResponseEntity.badRequest().body("Invalid prerequisite ID: " + prereq.getId());
-            }
-        }
-        return ResponseEntity.ok(courseRepository.save(course));
-    }
+	@PostMapping
+	public ResponseEntity<?> create(@RequestBody CourseDto dto) {
+		Set<Course> prereqs = new HashSet<>();
+		for (String pid : dto.prerequisiteIds) {
+			Course p = repo.findByCourseId(pid).orElseThrow(
+					() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid prerequisite: " + pid));
+			prereqs.add(p);
+		}
+		if (repo.existsByCourseId(dto.courseId)) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Course ID exists");
+		}
+		Course c = new Course(null, dto.courseId, dto.title, dto.description, prereqs);
+		c.setPrerequisites(prereqs);
+		repo.save(c);
+		return ResponseEntity.ok(c);
+	}
 
-    @GetMapping
-    public List<Course> getAllCourses() {
-        return courseRepository.findAll();
-    }
+	@GetMapping
+	public List<Course> all() {
+		return repo.findAll();
+	}
 
-    @GetMapping("/{code}")
-    public ResponseEntity<?> getCourseByCode(@PathVariable String code) {
-        return courseRepository.findByCourseCode(code)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
+	@GetMapping("/{cid}")
+	public Course one(@PathVariable String cid) {
+		return repo.findByCourseId(cid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+	}
 
-    @DeleteMapping("/{code}")
-    public ResponseEntity<?> deleteCourse(@PathVariable String code) {
-        Optional<Course> courseOpt = courseRepository.findByCourseCode(code);
-        if (courseOpt.isPresent()) {
-            Course course = courseOpt.get();
-            boolean isUsedAsPrerequisite = courseRepository.findAll().stream()
-                .anyMatch(c -> c.getPrerequisites().contains(course));
-            if (isUsedAsPrerequisite) {
-                return ResponseEntity.status(HttpStatus.CONFLICT)
-                        .body("Cannot delete course. It is used as a prerequisite.");
-            }
-            courseRepository.delete(course);
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
+	@DeleteMapping("/{cid}")
+	public ResponseEntity<?> delete(@PathVariable String cid) {
+		Course c = repo.findByCourseId(cid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+		boolean inUse = repo.findAll().stream().anyMatch(x -> x.getPrerequisites().contains(c));
+		if (inUse) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "Cannot delete; course is a prerequisite");
+		}
+		repo.delete(c);
+		return ResponseEntity.ok().build();
+	}
 }

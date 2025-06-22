@@ -10,6 +10,5 @@ import com.app.model.CourseInstance;
 public interface CourseInstanceRepository extends JpaRepository<CourseInstance, Long> {
 	List<CourseInstance> findByYearAndSemester(int year, int semester);
 
-	Optional<CourseInstance> findByCourse_CourseCodeAndYearAndSemester(String code, int year, int semester);
-
+	Optional<CourseInstance> findByCourse_CourseIdAndYearAndSemester(String cid, int year, int sem);
 }

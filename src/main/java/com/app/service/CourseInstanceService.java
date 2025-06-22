@@ -21,18 +21,5 @@ public class CourseInstanceService {
 	public List<CourseInstance> getInstances(int year, int semester) {
 		return instanceRepository.findByYearAndSemester(year, semester);
 	}
-//
-//	public CourseInstance getInstanceByCourseId(int year, int semester, String courseId) {
-//		return instanceRepository.findByYearAndSemesterAndCourse_CourseId(year, semester, courseId).orElse(null);
-//	}
-//
-//	public boolean deleteByCourseIdAndYearSemester(String courseId, int year, int semester) {
-//		Optional<CourseInstance> instanceOpt = instanceRepository.findByYearAndSemesterAndCourse_CourseId(year,
-//				semester, courseId);
-//		if (instanceOpt.isPresent()) {
-//			instanceRepository.delete(instanceOpt.get());
-//			return true;
-//		}
-//		return false;
-//	}
+
 }
