@@ -6,11 +6,10 @@ services:
     container_name: mysql-container
     restart: always
     environment:
-	  MYSQL_ROOT_PASSWORD: 
       MYSQL_DATABASE: assignment
-     
+      MYSQL_ROOT_PASSWORD: 
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - spring-net
     volumes:
@@ -29,7 +28,7 @@ services:
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
       SPRING_JPA_SHOW_SQL: "true"
       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
-      SERVER_PORT: 
+      SERVER_PORT: 8888
     ports:
       - "8888:8888"
     networks:
