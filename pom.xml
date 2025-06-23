@@ -67,6 +67,7 @@
 	</dependencies>
 
 	<build>
+	<finalName>docker-app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -1,7 +1,8 @@
 FROM eclipse-temurin:17-jdk-alpine
-WORKDIR /app
-COPY target/softwaredevelopmentassignments-0.0.1-SNAPSHOT.jar /app/softwaredevelopmentassignments.jar
+
+COPY target/docker-app.jar  /user/app/
+WORKDIR /user/app
 EXPOSE 8888
-ENTRYPOINT ["java", "-jar", "softwaredevelopmentassignments.jar"]
+ENTRYPOINT ["java", "-jar", "docker-app.jar"]
 
 
