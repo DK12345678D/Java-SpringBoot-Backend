@@ -1,5 +1,5 @@
 🎓 Internship Assignment – Application Software Centre, IIT Bombay
-This project is a full-stack application developed for the internship assignment. 
+This project is a full-stack application developed for the internship assignment.  
 It consists of:
 
 A Spring Boot REST API backend to manage courses and instances
