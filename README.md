@@ -1,59 +1,55 @@
-🎓 Internship Assignment – Application Software Centre, IIT Bombay
-This project is a full-stack application developed for the internship assignment.  
-It consists of:
 
-A Spring Boot REST API backend to manage courses and instances
+# 🎓 Internship Assignment – Application Software Centre, IIT Bombay  
 
-A Angular-based frontend to consume and display the API
+## 📌 Overview  
+| **Component**        | **Description** |
+|----------------------|-----------------|
+| **Backend**          | Spring Boot REST API to manage courses and course instances |
+| **Frontend**         | Angular-based UI for interacting with the API |
+| **Deployment**       | Dockerized for local & cloud deployment |
+| **Extras**           | Optional CI/CD workflow & DockerHub publishing |
 
-Dockerized setup for local and cloud deployment
+---
 
-CI/CD workflow and DockerHub publishing (optional)
+## 🏗️ Project Structure  
+| **Module** | **Technology** | **Key Features** |
+|------------|---------------|------------------|
+| **spring-boot-courses-api** | Java, Spring Boot | REST API, Validation, Dependency Checks, Error Handling |
+| **Angular-courses-ui**      | Angular           | Create/View/Delete Courses & Instances, Prerequisite Handling |
 
-🏗️ Project Structure
-🔙 Backend (spring-boot-courses-api)
-Built with Java & Spring Boot
+---
 
-REST API to manage:
+## 🌐 Backend (Spring Boot API)  
 
-Courses (POST, GET, DELETE)
+### **Courses API**
+| **Method** | **Endpoint**                  | **Description** |
+|------------|--------------------------------|-----------------|
+| POST       | `/api/courses`                | Create a new course (validates prerequisites) |
+| GET        | `/api/courses`                | List all courses with prerequisites |
+| GET        | `/api/courses/:id`            | Get course by ID with prerequisites |
+| DELETE     | `/api/courses/:id`            | Delete course (blocked if used as prerequisite) |
 
-Course delivery instances (POST, GET, DELETE)
+### **Course Instances API**
+| **Method** | **Endpoint**                                      | **Description** |
+|------------|---------------------------------------------------|-----------------|
+| POST       | `/api/instances`                                 | Create a course instance (year & semester) |
+| GET        | `/api/instances/:year/:semester`                 | List courses for a given year/semester |
+| GET        | `/api/instances/:year/:semester/:courseId`       | View a specific course instance |
+| DELETE     | `/api/instances/:year/:semester/:courseId`       | Delete a course instance |
 
-Validation of prerequisites and dependency checks
+---
 
-Error handling using appropriate HTTP status codes
+## 🌐 Frontend (Angular UI)  
+| **Feature** | **Description** |
+|-------------|-----------------|
+| Course Management | Create & view courses with prerequisites |
+| Instance Management | Create & view course instances |
+| Deletion Logic | Block deletion if course is a prerequisite |
+| Filtering | View course details by year & semester |
 
-🌐 Frontend (Angular-courses-ui)
-Built with Angular
+---
 
-Functionalities:
-
-Create & view courses with prerequisites
-
-Create & view course instances
-
-Delete courses (with dependency warning)
-
-View course details by year & semester
-
-🧪 API Features
-🔧 Courses API
-Endpoint	Description
-POST /api/courses	Create a new course (validates prerequisites)
-GET /api/courses	List all courses with prerequisites
-GET /api/courses/:id	Get course by ID with its prerequisites
-DELETE /api/courses/:id	Delete course (blocked if used as prerequisite)
-
-🔧 Course Instances API
-Endpoint	Description
-POST /api/instances	Create a course instance (year & semester)
-GET /api/instances/:year/:semester	List courses for a year/semester
-GET /api/instances/:year/:semester/:courseId	View specific course instance
-DELETE /api/instances/:year/:semester/:courseId	Delete course instance
-
-
-📦 Example Course Model (JSON)
+## 📦 Example Course Model (JSON)
 ```json
 {
   "courseId": "CS209",
@@ -63,8 +59,9 @@ DELETE /api/instances/:year/:semester/:courseId	Delete course instance
 }
 ```
 
-👨‍💻 Author
-Dinkar Prasad 
-Java Developer | Angular Enthusiast
-📧 Email: dinkarprasad682@gmail.com
-🔗 LinkedIn: linkedin.com/in/dinkarprasad682
+---
+
+## 👨‍💻 Author  
+| **Name**       | **Role**                  | **Email**                     | **LinkedIn** |
+|----------------|---------------------------|--------------------------------|--------------|
+| Dinkar Prasad  | Java Developer, Angular Enthusiast | dinkarprasad682@gmail.com | [linkedin.com/in/dinkarprasad682](https://linkedin.com/in/dinkarprasad682) |
