@@ -2,7 +2,7 @@
 # 🎓 Internship Assignment – Application Software Centre, IIT Bombay  
 
 ## 📌 Overview  
-| **Component**        | **Description** |
+| **Component**        | **Description** | 
 |----------------------|-----------------|
 | **Backend**          | Spring Boot REST API to manage courses and course instances |
 | **Frontend**         | Angular-based UI for interacting with the API |
