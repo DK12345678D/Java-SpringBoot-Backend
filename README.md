@@ -4,7 +4,7 @@
 ## 📌 Overview  
 | **Component**        | **Description** | 
 |----------------------|-----------------|
-| **Backend**          | Spring Boot REST API to manage courses and course instances |
+| **Backend**          | Spring Boot REST API to manage courses and course instances | 
 | **Frontend**         | Angular-based UI for interacting with the API |
 | **Deployment**       | Dockerized for local & cloud deployment |
 | **Extras**           | Optional CI/CD workflow & DockerHub publishing |
