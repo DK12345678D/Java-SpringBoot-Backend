@@ -49,7 +49,7 @@
 
 ---
 
-## 📦 Example Course Model (JSON)
+## 📦 Example Course Model (JSON)  
 ```json
 {
   "courseId": "CS209",
