@@ -38,7 +38,7 @@
 | DELETE     | `/api/instances/:year/:semester/:courseId`       | Delete a course instance |
 
 ---
-
+ 
 ## 🌐 Frontend (Angular UI)  
 | **Feature** | **Description** |
 |-------------|-----------------|
