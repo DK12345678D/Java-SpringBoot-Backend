@@ -51,7 +51,7 @@
 
 ## 📦 Example Course Model (JSON)  
 ```json
-{
+{   
   "courseId": "CS209",
   "title": "Intro to Computer Programming",
   "description": "This course provides a basic introduction to programming.",
