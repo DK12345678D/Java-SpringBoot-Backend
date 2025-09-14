@@ -9,7 +9,7 @@
 | **Deployment**       | Dockerized for local & cloud deployment |
 | **Extras**           | Optional CI/CD workflow & DockerHub publishing |
 
----
+---  
 
 ## 🏗️ Project Structure  
 | **Module** | **Technology** | **Key Features** |
